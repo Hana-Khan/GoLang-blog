@@ -33,3 +33,12 @@ func FindPosts(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"data": posts})
 }
 
+// a route that fetches only one specified post by URL param:
+func FindPost(c *gin.Context) {
+    var post models.Post
+
+    if err := models.DB.Where("id = ?", c.Param("id")).First(&post).Error; err != nil {
+        c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": err.Error()})
+        return
+    }
+
