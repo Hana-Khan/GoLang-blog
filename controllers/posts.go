@@ -42,3 +42,7 @@ func FindPost(c *gin.Context) {
         return
     }
 
+    // DB.Where() lets you write SQL query commands, replacing the dynamic data with ? and passing the actual data as the second argument. DB.First(&post), like its name, selects the first name of the given collection of data and stores the result inside post.
+// context.Param("<param-name>") is a Gin method to fetch the URL parameter by param name.
+    c.JSON(http.StatusOK, gin.H{"data": post})
+}
